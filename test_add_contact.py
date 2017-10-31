@@ -18,50 +18,50 @@ class test_add_contact(unittest.TestCase):
     def open_homepage(self, wd):
         wd.get("http://localhost/addressbook/")
 
-    def login(self, wd):
+    def login(self, wd, username, password):
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
+        wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").click()
         wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
+        wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
 
     def add_contact(self, wd):
         wd.find_element_by_link_text("add new").click()
 
-    def create_contact(self, wd):
+    def create_contact(self, wd, name, initials, lname, nick, title, company, address, hphone, mail, web, byear, ayear):
         # fill contact form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys("John")
+        wd.find_element_by_name("firstname").send_keys(name)
         wd.find_element_by_name("middlename").click()
         wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys("JD")
+        wd.find_element_by_name("middlename").send_keys(initials)
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys("Doe")
+        wd.find_element_by_name("lastname").send_keys(lname)
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys("JD")
+        wd.find_element_by_name("nickname").send_keys(nick)
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
-        wd.find_element_by_name("title").send_keys("Mr")
+        wd.find_element_by_name("title").send_keys(title)
         wd.find_element_by_name("company").click()
         wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys("Microsoft")
+        wd.find_element_by_name("company").send_keys(company)
         wd.find_element_by_name("address").click()
         wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys("Redmond")
+        wd.find_element_by_name("address").send_keys(address)
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys("+165688877744")
+        wd.find_element_by_name("home").send_keys(hphone)
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys("johndoe@microsoft.com")
+        wd.find_element_by_name("email").send_keys(mail)
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
-        wd.find_element_by_name("homepage").send_keys("www.johndoe.com")
+        wd.find_element_by_name("homepage").send_keys(web)
         # input birthday
         if not wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[9]").is_selected():
             wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[9]").click()
@@ -69,7 +69,7 @@ class test_add_contact(unittest.TestCase):
             wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[11]").click()
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
-        wd.find_element_by_name("byear").send_keys("1974")
+        wd.find_element_by_name("byear").send_keys(byear)
         # input anniversary
         if not wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[19]").is_selected():
             wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[19]").click()
@@ -77,7 +77,7 @@ class test_add_contact(unittest.TestCase):
             wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option[6]").click()
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
-        wd.find_element_by_name("ayear").send_keys("1996")
+        wd.find_element_by_name("ayear").send_keys(ayear)
         # submit contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
@@ -90,9 +90,11 @@ class test_add_contact(unittest.TestCase):
     def test_add_contact(self):
         wd = self.wd
         self.open_homepage(wd)
-        self.login(wd)
+        self.login(wd, username="admin", password="secret")
         self.add_contact(wd)
-        self.create_contact(wd)
+        self.create_contact(wd, name="John", initials="JD", lname="Doe", nick="JD", title="Mr", company="Microsoft",
+                       address="Redmond", hphone="+165688877744", mail="johndoe@microsoft.com", web="www.johndoe.com",
+                       byear="1974", ayear="1996")
         self.return_to_homepage(wd)
         self.logout(wd)
 

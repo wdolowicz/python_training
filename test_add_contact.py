@@ -12,13 +12,15 @@ def is_alert_present(wd):
 
 class test_add_contact(unittest.TestCase):
     def setUp(self):
-        self.wd = WebDriver()
+        self.wd = WebDriver(capabilities={"marionette": False})
         self.wd.implicitly_wait(60)
     
     def test_test_add_contact(self):
         success = True
         wd = self.wd
+        # open homepage
         wd.get("http://localhost/addressbook/")
+        # login
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys("admin")
@@ -26,7 +28,9 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys("secret")
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+        # init contact creation
         wd.find_element_by_link_text("add new").click()
+        # fill contact form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys("John")
@@ -57,6 +61,7 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys("www.johndoe.com")
+        # input birthday
         if not wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[9]").is_selected():
             wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[9]").click()
         if not wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[11]").is_selected():
@@ -64,6 +69,7 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys("1974")
+        # input anniversary
         if not wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[19]").is_selected():
             wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[19]").click()
         if not wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option[6]").is_selected():
@@ -71,8 +77,11 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys("1996")
+        # submit contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        # return to homepage
         wd.find_element_by_link_text("home page").click()
+        # logout
         wd.find_element_by_link_text("Logout").click()
         self.assertTrue(success)
     

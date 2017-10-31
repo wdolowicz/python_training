@@ -99,16 +99,6 @@ class test_add_contact(unittest.TestCase):
         self.return_to_homepage(wd)
         self.logout(wd)
 
-    def test_add_empty_contact(self):
-        wd = self.wd
-        self.open_homepage(wd)
-        self.login(wd, username="admin", password="secret")
-        self.add_contact(wd)
-        self.create_contact(wd, Contact(name="", initials="", lname="", nick="", title="", company="", address="", hphone="",
-                            mail="", web="", byear="", ayear=""))
-        self.return_to_homepage(wd)
-        self.logout(wd)
-
 
     def tearDown(self):
         self.wd.quit()

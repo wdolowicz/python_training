@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 __author__ = "wdolowicz"
-from selenium.webdriver.firefox.webdriver import WebDriver
 import unittest
-from contact import Contact
+
+from selenium.webdriver.firefox.webdriver import WebDriver
+
+from model.contact import Contact
+
 
 def is_alert_present(wd):
     try:

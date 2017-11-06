@@ -3,7 +3,7 @@ __author__ = 'wdolowicz'
 
 class Contact:
 
-    def __init__(self, name, initials, lname, nick, title, company, address, hphone, mail, web, byear, ayear):
+    def __init__(self, name, initials, lname, nick, title, company, address, hphone, mail, web):
         self.name = name
         self.initials = initials
         self.lname = lname
@@ -14,5 +14,3 @@ class Contact:
         self.hphone = hphone
         self.mail = mail
         self.web = web
-        self.byear = byear
-        self.ayear = ayear

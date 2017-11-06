@@ -7,7 +7,8 @@ class Application:
     def __init__(self):
         self.wd = WebDriver(capabilities={"marionette": False})
         self.wd.implicitly_wait(60)
-    def open_home_page(self, wd):
+
+    def open_home_page(self):
         wd = self.wd
         wd.get("http://localhost/addressbook/")
 
@@ -46,9 +47,11 @@ class Application:
         self.return_to_groups_page()
 
     def return_to_groups_page(self):
+        wd = self.wd
         wd.find_element_by_link_text("group page").click()
 
     def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
     def destroy(self):

@@ -56,6 +56,13 @@ class ContactHelper:
         # confirm deletion
         wd.switch_to_alert().accept()
 
+    def delete_first_contact_hard(self):
+        wd = self.app.wd
+        # select and edit first contact
+        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        # delete
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/input[2]").click()
+
     def modcontact(self, contact):
         wd = self.app.wd
         # select and edit first contact

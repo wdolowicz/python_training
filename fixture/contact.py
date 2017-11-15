@@ -5,6 +5,10 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
+    def open_home_page(self):
+        wd = self.app.wd
+        wd.get("http://localhost/addressbook/")
+
     def add_contact(self):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
@@ -31,19 +35,18 @@ class ContactHelper:
 
     def create(self, new_contact_data):
         wd = self.app.wd
+        self.open_home_page()
         self.add_contact()
         self.fill_contact_form(new_contact_data)
         # submit contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
-    def select_first_contact(self):
-        wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
-
 
     def delete_first_contact(self):
         wd = self.app.wd
-        self.select_first_contact()
+        self.open_home_page()
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
         # delete
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         # confirm deletion
@@ -51,6 +54,7 @@ class ContactHelper:
 
     def delete_first_contact_hard(self):
         wd = self.app.wd
+        self.open_home_page()
         # select first contact
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
         # delete
@@ -58,6 +62,7 @@ class ContactHelper:
 
     def modcontact(self, new_contact_data):
         wd = self.app.wd
+        self.open_home_page()
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
         # edit contact form
         self.fill_contact_form(new_contact_data)
@@ -66,6 +71,7 @@ class ContactHelper:
 
     def modcontact_h(self, new_contact_data):
         wd = self.app.wd
+        self.open_home_page()
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
         # begin contact modification
         wd.find_element_by_name("modifiy").click()

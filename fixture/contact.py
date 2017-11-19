@@ -99,8 +99,9 @@ class ContactHelper:
         wd = self.app.wd
         self.open_home_page()
         contacts = []
-        for element in wd.find_elements_by_css_selector("table.sortcompletecallback-applyZebra"):
-            text = element.text
+        for element in wd.find_elements_by_name("entry"):
+            cells = element.find_elements_by_tag_name("td")
+            text = cells[1] and cells[2]
             id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(Contact(title=text, id=id))
+            contacts.append(Contact(name=text, id=id))
         return contacts

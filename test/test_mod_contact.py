@@ -12,7 +12,7 @@ def test_mod_contact(app):
                                    company="Rockstar Games", address="Grove Street", hphone="+199988877715",
                                    mail="cj@rockstar.com", web="www.rockstargames.com")
     contact.id = old_contacts[0].id
-    app.contact.modcontact(Contact())
+    app.contact.modcontact(contact)
     assert len(old_contacts) == app.contact.count()
     new_contacts = app.contact.get_contact_list()
     old_contacts[0] = contact

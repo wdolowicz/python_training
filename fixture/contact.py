@@ -45,12 +45,22 @@ class ContactHelper:
         self.open_home_page()
         self.contact_cache = None
 
+    def select_first_contact(self):
+        wd = self.app.wd
+        self.select_contact_by_index(0)
+
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
 
     def delete_first_contact(self):
         wd = self.app.wd
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
+        wd = self.app.wd
         self.open_home_page()
-        # select first contact
-        wd.find_element_by_name("selected[]").click()
+        self.select_contact_by_index(index)
         # delete
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         # confirm deletion
@@ -58,33 +68,11 @@ class ContactHelper:
         self.open_home_page()
         self.contact_cache = None
 
-    def delete_first_contact_hard(self):
-        wd = self.app.wd
-        self.open_home_page()
-        # select first contact
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
-        # delete
-        wd.find_element_by_xpath("//div[@id='content']/form[2]/input[2]").click()
-        self.open_home_page()
-        self.contact_cache = None
-
     def modcontact(self, new_contact_data):
         wd = self.app.wd
         self.open_home_page()
+        # select contact to edit
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
-        # edit contact form
-        self.fill_contact_form(new_contact_data)
-        # submit contact modification
-        wd.find_element_by_name("update").click()
-        self.open_home_page()
-        self.contact_cache = None
-
-    def modcontact_h(self, new_contact_data):
-        wd = self.app.wd
-        self.open_home_page()
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
-        # begin contact modification
-        wd.find_element_by_name("modifiy").click()
         # edit contact form
         self.fill_contact_form(new_contact_data)
         # submit contact modification

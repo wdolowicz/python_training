@@ -68,11 +68,19 @@ class ContactHelper:
         self.open_home_page()
         self.contact_cache = None
 
-    def modcontact(self, new_contact_data):
+    def select_contact_to_edit(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_xpath("//table[@id='maintable']/tbody/tr/td[8]/a/img")[index].click()
+
+    def modify_first_contact(self):
+        wd = self.app.wd
+        self.modcontact_by_index(2)
+
+    def modcontact_by_index(self, index, new_contact_data):
         wd = self.app.wd
         self.open_home_page()
         # select contact to edit
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        self.select_contact_to_edit(index)
         # edit contact form
         self.fill_contact_form(new_contact_data)
         # submit contact modification

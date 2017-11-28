@@ -10,9 +10,9 @@ def test_mod_contact(app):
         app.contact.create(Contact(name="test"))
     old_contacts = app.contact.get_contact_list()
     index = randrange(len(old_contacts))
-    contact = Contact(name="Carl", initials="CJ", lname="Johnson", nick="CJ", title="Mr",
-                                   company="Rockstar Games", address="Grove Street", hphone="+199988877715",
-                                   mail="cj@rockstar.com", web="www.rockstargames.com")
+    contact = Contact(name="Carl", initials="CJ", lname="Johnson", nick="CJ", title="Mr", company="Rockstar Games",
+                      address="Grove Street", hphone="+199988877715", mphone="+1434376655683", wphone="+13475674567456",
+                      sphone="+15643657456485", mail="cj@rockstar.com", web="www.rockstargames.com")
     contact.id = old_contacts[index].id
     app.contact.modcontact_by_index(index, contact)
     assert len(old_contacts) == app.contact.count()

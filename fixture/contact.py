@@ -2,13 +2,16 @@ __author__ = 'wdolowicz'
 
 from model.contact import Contact
 
+
 class ContactHelper:
     def __init__(self, app):
         self.app = app
 
     def open_home_page(self):
         wd = self.app.wd
-        if not (wd.current_url.endswith("/addressbook") and len(wd.find_elements_by_xpath("//div[@id='content']/form[2]/div[1]/input")) > 0):
+        if not (wd.current_url.endswith("/addressbook") and len(wd.find_elements_by_xpath("//div[@id='content']"
+                                                                                          "/form[2]/div[1]/input"
+                                                                                          )) > 0):
             wd.get("http://localhost/addressbook/")
 
     def add_contact(self):
@@ -113,3 +116,10 @@ class ContactHelper:
                 id = element.find_element_by_name("selected[]").get_attribute("value")
                 self.contact_cache.append(Contact(name=firstname, lname=lastname, id=id))
         return list(self.contact_cache)
+
+    def open_contact_view_by_index(self, index):
+        wd = self.app.wd
+        self.open_home_page()
+        row = wd.find_elements_by_name("entry")[index]
+        cell = row.find_elements_by_tag_name("td")[6]
+        cell.find_element_by_tag_name("a").click()

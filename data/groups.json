@@ -1,38 +1,44 @@
 [
   {
-    "name": "",
-    "header": "",
+    "py/object": "model.group.Group",
     "footer": "",
-    "id": null
+    "header": "",
+    "id": null,
+    "name": ""
   },
   {
-    "name": "name",
-    "header": "headerDpC",
-    "footer": "footer#f",
-    "id": null
+    "py/object": "model.group.Group",
+    "footer": "footerM",
+    "header": "headerKWMiB \\\"R~sX]}5<\"",
+    "id": null,
+    "name": "nameX"
   },
   {
-    "name": "name ",
-    "header": "header4*4wd+{1NSX K",
-    "footer": "footerI k",
-    "id": null
+    "py/object": "model.group.Group",
+    "footer": "footer2j[<,[cXP@ngqNhw9",
+    "header": "header",
+    "id": null,
+    "name": "nameh4Q"
   },
   {
-    "name": "name \"",
-    "header": "header[dJ`OW9RV] O\"",
-    "footer": "footerR !v",
-    "id": null
+    "py/object": "model.group.Group",
+    "footer": "footerIbl4j]K2vE F",
+    "header": "header`fl!eip@X ?J8 :h ",
+    "id": null,
+    "name": "namehAf+$/W 7"
   },
   {
-    "name": "name   ",
-    "header": "headerwvBQscOI, D<.9 ",
-    "footer": "footer^(u&m",
-    "id": null
+    "py/object": "model.group.Group",
+    "footer": "footer,dZT@ ",
+    "header": "header)R_Rs\\]a GT l8C",
+    "id": null,
+    "name": "nameio"
   },
   {
-    "name": "name~$W",
-    "header": "headera}pv",
-    "footer": "footerS| oi&je UPfGfT>j#",
-    "id": null
+    "py/object": "model.group.Group",
+    "footer": "footer# Faov,A@7`9 4$rnCk",
+    "header": "headerg9{B{]e/bU%'O+oxR ",
+    "id": null,
+    "name": "namekR/GmWB6"
   }
 ]

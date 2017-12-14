@@ -5,17 +5,18 @@ from model.contact import Contact
 from random import randrange
 
 
-def test_mod_contact(app):
+def test_mod_contact(app, db, check_ui):
     if app.contact.count() == 0:
-        app.contact.create(Contact(name="test"))
-    old_contacts = app.contact.get_contact_list()
+        app.contact.create(Contact(firstname="test"))
+    old_contacts = db.get_contact_list()
     index = randrange(len(old_contacts))
-    contact = Contact(name="Carl", initials="CJ", lname="Johnson", nick="CJ", title="Mr", company="Rockstar Games",
-                      address="Grove Street", hphone="+199988877715", mphone="+1434376655683", wphone="+13475674567456",
-                      sphone="+15643657456485", mail="cj@rockstar.com", web="www.rockstargames.com")
+    contact = Contact(firstname="Carl", initials="CJ", lastname="Johnson", nick="CJ", title="Mr", company="Rockstar Games",
+                      address="Grove Street", home="+199988877715", mobile="+1434376655683", work="+13475674567456",
+                      secondary="+15643657456485", email="cj@rockstar.com", homepage="www.rockstargames.com")
     contact.id = old_contacts[index].id
     app.contact.modcontact_by_index(index, contact)
-    assert len(old_contacts) == app.contact.count()
-    new_contacts = app.contact.get_contact_list()
+    new_contacts = db.get_contact_list()
+    assert len(old_contacts) == len(new_contacts)
     old_contacts[index] = contact
-    assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
+    if check_ui:
+        assert sorted(new_contacts, key=Contact.id_or_max) == sorted(app.group.get_contact_list(), key=Contact.id_or_max)

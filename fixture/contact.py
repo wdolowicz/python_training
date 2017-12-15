@@ -52,6 +52,34 @@ class ContactHelper:
         self.open_home_page()
         self.contact_cache = None
 
+    def add_to_group(self, contact, group):
+        wd = self.app.wd
+        self.open_home_page()
+        # select contact to add
+        self.select_contact_by_id(contact.id)
+        # select group
+        wd.find_element_by_name("to_group").find_element_by_css_selector("option[value=\"%s\"]" % group.id).click()
+        # add to selected group
+        wd.find_element_by_name("add").click()
+        # return to group page
+        wd.find_element_by_partial_link_text("group page").click()
+        self.contact_cache = None
+
+    def delete_from_group(self, contact, group):
+        wd = self.app.wd
+        # select group
+        wd.find_element_by_name("group").find_element_by_css_selector("option[value=\"%s\"]" % group.id).click()
+        # select contact to remove
+        self.select_contact_by_id(contact.id)
+        # remove contact
+        wd.find_element_by_name("remove").click()
+        # return to group page
+        wd.find_element_by_partial_link_text("group page").click()
+
+    def select_group(self, group):
+        wd = self.app.wd
+        wd.find_element_by_name("group").find_element_by_css_selector("option[value=\"%s\"]" % group.id).click()
+
     def select_first_contact(self):
         wd = self.app.wd
         self.select_contact_by_index(0)

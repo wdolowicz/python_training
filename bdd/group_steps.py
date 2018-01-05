@@ -3,6 +3,7 @@ __author__ = 'wdolowicz'
 from pytest_bdd import given, when, then
 from model.group import Group
 import random
+from random import randrange
 
 
 @given('a group list')
@@ -58,13 +59,6 @@ def verify_group_deleted(db, non_empty_group_list, random_group, app, check_ui):
         assert sorted(new_groups, key=Group.id_or_max) == sorted(app.group.get_group_list(), key=Group.id_or_max)
 
 
-#@given('a non-empty group list')
-# def non_empty_group_list(db, app):
-#    if len(db.get_group_list()) == 0:
-#        app.group.create(Group(name="test group"))
-#    return db.get_group_list()
-
-
 @given('a random group from the list')
 def index_randrange_group(non_empty_group_list):
     return random.randrange(len(non_empty_group_list))
@@ -83,12 +77,12 @@ def modify_group(app, non_empty_group_list, index_randrange_group, mod_group):
     app.group.modify_group_by_id(mod_group.id, mod_group)
 
 
-@then('the new group list is equal to the old list with the modified group')
+@then('the new group list is equal to the old group list with the modified group')
 def verify_group_modified(app, db, non_empty_group_list, check_ui):
     old_groups = non_empty_group_list
     index = randrange(len(old_groups))
     new_groups = db.get_group_list()
     assert len(old_groups) == len(new_groups)
-    old_groups[index] =
+    old_groups[index] = new_groups
     if check_ui:
         assert sorted(new_groups, key=Group.id_or_max) == sorted(app.group.get_group_list(), key=Group.id_or_max)
